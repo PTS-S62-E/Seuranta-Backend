@@ -30,13 +30,26 @@ server.listen(port, function () {
     console.log('Server starter on port ' + port + '...');
 
     setInterval(function () {
-        request.get()
+        request.get('http://192.168.24.100:8082/Politie-Backend/api/status/',
+            function (error, response, body) {
+                const currentTime = new Date();
+                const status = (response.statusCode === 200) ? 'RUNNING' : 'DOWN';
+
+                fs.appendFile('status.log', `${currentTime}|POLITIE-BACKEND|${status}\n`, function (err) {
+                    if (err) throw err;
+                });
+            });
 
 
-        fs.appendFile('status.log', 'Hello content!\n', function (err) {
-            if(err) throw err;
+        request.get('http://192.168.24.100:8082/rekening-administratie/api/status/',
+            function (error, response, body) {
+                const currentTime = new Date();
+                const status = (response.statusCode === 200) ? 'RUNNING' : 'DOWN';
 
-            console.log('Saved');
-        });
-    }, 10*1000);
+                fs.appendFile('status.log', `${currentTime}|REKENING-ADMINISTRATIE|${status}\n`, function (err) {
+                    if (err) throw err;
+                });
+            });
+
+    }, 3 * 1000);
 });
