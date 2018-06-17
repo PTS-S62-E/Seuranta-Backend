@@ -5,8 +5,6 @@ import request from 'request';
 
 const fs = require('fs');
 
-import submissionRoutes from './routes/submissions';
-
 const app = express();
 
 app.use(function (request, response, next) {
@@ -22,8 +20,6 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// Routes
-app.use('/api/submissions', submissionRoutes);
 
 // Starts server
 server.listen(port, function () {
