@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Status</title>
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/lux/bootstrap.min.css"
+            rel="stylesheet"
+            crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a class="navbar-brand" href="#">Service Monitoring</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <iframe src="status.log"
+                    id="logFrame"
+                    frameborder="0"
+                    height="640"
+                    width="95%"></iframe>
+        </div>
+    </div>
+</div>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $("#logFrame").load(function () {
+            this.contentWindow.scrollBy(0, 1000000000)
+        });
+
+        setInterval(function () {
+            document.getElementById('logFrame').src = document.getElementById('logFrame').src
+            $("#logFrame").load(function () {
+                this.contentWindow.scrollBy(0, 1000000000)
+            });
+        }, 900000);
+    });
+</script>
+</body>
+</html>

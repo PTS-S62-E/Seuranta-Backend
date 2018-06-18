@@ -4,7 +4,7 @@
   "description": "Backend for the board",
   "main": "lib/index.js",
   "scripts": {
-    "compile": "babel --presets es2015 src -d lib",
+    "compile": "babel --presets es2015 src -d lib && rm -rf lib/public && cp -R src/public lib/public",
     "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run compile && node lib/index.js"
